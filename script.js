@@ -119,7 +119,10 @@ const openPanel1 = () => {
 };
 
 const addNote1 = () => {
-	if (textArea.value !== '') {
+	if (
+		textArea.value !== '' &&
+		category.options[category.selectedIndex].value !== '0'
+	) {
 		createNote1();
 		closePanel1();
 	} else {
@@ -160,6 +163,26 @@ const createNote1 = () => {
 	noteDiv.appendChild(noteBody);
 
 	noteArea.appendChild(noteDiv);
+	checkColor(noteDiv, noteTitle); // Przekazujemy nazwę kategorii do funkcji checkColor
+};
+
+const checkColor = (note, category) => {
+	switch (category) {
+		case 'Zakupy':
+			note.style.backgroundColor = 'rgb(72,255,0)';
+			break;
+
+		case 'Praca':
+			note.style.backgroundColor = 'rgb(255,243,0)';
+			break;
+
+		case 'Inne':
+			note.style.backgroundColor = 'rgb(0,170,255)';
+			break;
+		default:
+			note.style.backgroundColor = 'white'; // Ustawienie domyślnego koloru tła
+			break;
+	}
 };
 
 const closePanel1 = () => {
